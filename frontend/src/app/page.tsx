@@ -30,7 +30,7 @@ export default function Home() {
   });
 
   useEffect(() => {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001/api';
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://scorescreener-1.onrender.com/api';
       fetch(`${apiUrl}/stocks`)
         .then(res => res.json())
         .then(data => {

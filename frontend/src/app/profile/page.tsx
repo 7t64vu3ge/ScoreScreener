@@ -13,7 +13,7 @@ export default function ProfilePage() {
     const [profile, setProfile] = useState<any>(null);
     const [isEditing, setIsEditing] = useState(false);
     const [formData, setFormData] = useState({ bio: '', avatarUrl: '' });
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001/api';
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://scorescreener-1.onrender.com/api';
 
     useEffect(() => {
         if (!authLoading && !user) {

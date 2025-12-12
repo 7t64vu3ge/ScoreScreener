@@ -16,7 +16,7 @@ export default function WatchlistPage() {
   useEffect(() => {
     const fetchData = async () => {
         try {
-            const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001/api';
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://scorescreener-1.onrender.com/api';
             const [stocksRes, watchlistRes] = await Promise.all([
                 fetch(`${apiUrl}/stocks`),
                 fetch(`${apiUrl}/watchlist`)

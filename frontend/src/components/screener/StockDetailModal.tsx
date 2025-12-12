@@ -15,7 +15,7 @@ interface StockDetailModalProps {
 export function StockDetailModal({ stock, onClose }: StockDetailModalProps) {
   const [inWatchlist, setInWatchlist] = useState(false);
   const [loading, setLoading] = useState(false);
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001/api';
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://scorescreener-1.onrender.com/api';
 
   useEffect(() => {
     if (stock) {

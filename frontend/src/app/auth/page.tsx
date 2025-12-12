@@ -16,7 +16,7 @@ export default function AuthPage() {
     
     const { login } = useAuth();
     const router = useRouter();
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001/api';
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://scorescreener-1.onrender.com/api';
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();

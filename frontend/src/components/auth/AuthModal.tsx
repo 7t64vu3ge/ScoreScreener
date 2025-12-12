@@ -19,7 +19,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
     const [loading, setLoading] = useState(false);
     
     const { login } = useAuth();
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001/api';
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://scorescreener-1.onrender.com/api';
     
     React.useEffect(() => {
         if (isOpen) console.log("AuthModal is OPEN");

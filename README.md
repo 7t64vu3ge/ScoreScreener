@@ -21,7 +21,6 @@
 
 ### 🎨 Design
 - **Swiss Grid System**: A strict, content-first layout system.
-- **Dark Mode**: Sleek dark aesthetic by default.
 - **Responsive**: Fully responsive sidebar and content area.
 
 ---

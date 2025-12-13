@@ -4,6 +4,8 @@
 
 🚀 **Live Demo:** [https://score-screener.vercel.app/](https://score-screener.vercel.app/)
 
+🎥 **Demo Video:** [Watch on Google Drive](https://drive.google.com/file/d/1zza1vHyKIZbt8S6k84Zo6UdIShhT4u6i/view?usp=sharing)
+
 ## Features
 
 ### 🔍 Powerful Screener

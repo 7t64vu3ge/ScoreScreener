@@ -2,6 +2,8 @@
 
 **ScoreScreener** is a modern, high-performance stock screening application designed with a minimalist "Swiss Grid" aesthetic. It allows users to filter, analyze, and track stocks with ease.
 
+🚀 **Live Demo:** [https://score-screener.vercel.app/](https://score-screener.vercel.app/)
+
 ## Features
 
 ### 🔍 Powerful Screener

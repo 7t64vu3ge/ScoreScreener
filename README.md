@@ -19,6 +19,7 @@
 
 ### ⭐️ Watchlist
 - **Track Favorites**: Add interesting stocks to your personal watchlist for quick access.
+- **Secure Storage**: Watchlist data is securely stored and associated with your user profile.
 - **Real-time Updates**: Watchlist stays in sync with market data.
 
 ### 🎨 Design

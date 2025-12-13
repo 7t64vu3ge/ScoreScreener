@@ -1,20 +1,33 @@
 "use client"
 import React, { useState, useEffect, useMemo } from 'react';
+import Link from 'next/link';
+import { Button } from '@/components/ui/Button';
 import { Stock, SortOption, SortField } from '@/lib/types';
 import { sortStocks } from '@/lib/screenerLogic';
 import { ResultsTable } from '@/components/screener/ResultsTable';
 import { StockDetailModal } from '@/components/screener/StockDetailModal';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/context/AuthContext';
 
 export default function WatchlistPage() {
   const [stocks, setStocks] = useState<Stock[]>([]);
   const [watchlistTickers, setWatchlistTickers] = useState<string[]>([]);
   const [sort, setSort] = useState<SortOption>({ field: 'marketCap', direction: 'desc' });
   const [selectedStock, setSelectedStock] = useState<Stock | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [dataLoading, setDataLoading] = useState(true);
+  
+  const { user, loading: authLoading } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!authLoading && !user) {
+        // router.push('/auth'); // Or just show message as requested
+    }
+  }, [authLoading, user, router]);
 
   useEffect(() => {
     const fetchData = async () => {
+        if (!user) return; // Don't fetch if no user
         try {
             const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://scorescreener-1.onrender.com/api';
             const [stocksRes, watchlistRes] = await Promise.all([
@@ -30,11 +43,15 @@ export default function WatchlistPage() {
         } catch (error) {
             console.error("Failed to fetch data", error);
         } finally {
-            setLoading(false);
+            setDataLoading(false);
         }
     };
-    fetchData();
-  }, []);
+    if (!authLoading && user) {
+        fetchData();
+    } else if (!authLoading && !user) {
+        setDataLoading(false);
+    }
+  }, [user, authLoading]);
 
   const watchlistStocks = useMemo(() => {
       return stocks.filter(stock => watchlistTickers.includes(stock.ticker));
@@ -51,7 +68,23 @@ export default function WatchlistPage() {
     }));
   };
 
-  if (loading) return <div className="p-10">Loading Watchlist...</div>;
+  if (authLoading || dataLoading) return (
+      <div className="h-screen flex items-center justify-center bg-background text-foreground">
+          <div className="text-lg animate-pulse">Loading Watchlist...</div>
+      </div>
+  );
+
+  if (!user) {
+      return (
+          <div className="h-screen flex flex-col items-center justify-center bg-background text-foreground gap-4">
+              <h1 className="text-2xl font-bold">Access Denied</h1>
+              <p className="text-muted-foreground">Please sign in to your account to view your watchlist.</p>
+              <Link href="/auth">
+                  <Button>Sign In</Button>
+              </Link>
+          </div>
+      );
+  }
 
   return (
     <main className="h-screen flex flex-col bg-background text-foreground overflow-hidden font-sans">

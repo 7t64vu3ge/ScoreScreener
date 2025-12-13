@@ -13,6 +13,7 @@ export default function Home() {
   const [stocks, setStocks] = useState<Stock[]>([]);
   const [filteredStocks, setFilteredStocks] = useState<Stock[]>([]);
   const [selectedStock, setSelectedStock] = useState<Stock | null>(null);
+  const [loading, setLoading] = useState(true);
   
   const { user, logout } = useAuth();
   
@@ -39,7 +40,8 @@ export default function Home() {
                 setFilteredStocks(data); // Initialize filtered stocks with all data
             }
         })
-        .catch(err => console.error("Failed to fetch stocks", err));
+        .catch(err => console.error("Failed to fetch stocks", err))
+        .finally(() => setLoading(false));
   }, []);
 
   // Filter effect
@@ -68,10 +70,12 @@ export default function Home() {
              <div className="size-8 bg-black text-white flex items-center justify-center font-bold text-lg rounded-none">S</div>
              <h1 className="text-xl font-bold tracking-tight">ScoreScreener</h1>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-6 text-xs font-medium text-muted-foreground uppercase tracking-wider">
+          <span className="text-foreground">Screener</span>
+          <Link href="/watchlist" className="hover:text-foreground transition-colors">Watchlist</Link>
           {user ? (
               <div className="flex items-center gap-4">
-                  <span className="text-sm text-muted-foreground">Hello, {user.username}</span>
+                  <span className="text-sm text-muted-foreground normal-case tracking-normal">Hello, {user.username}</span>
                   <Link href="/profile">
                     <Button variant="outline" size="sm">Profile</Button>
                   </Link>
@@ -112,12 +116,18 @@ export default function Home() {
               <h2 className="text-lg font-semibold">Results: {filteredStocks.length}</h2>
            </div>
            
-           <ResultsTable 
-             stocks={filteredStocks} 
-             onRowClick={setSelectedStock}
-             sort={sortOption}
-             onSort={handleSortChange}
-           />
+           {loading ? (
+               <div className="h-full flex items-center justify-center">
+                   <div className="text-muted-foreground animate-pulse">Loading stocks...</div>
+               </div>
+           ) : (
+             <ResultsTable 
+               stocks={filteredStocks} 
+               onRowClick={setSelectedStock}
+               sort={sortOption}
+               onSort={handleSortChange}
+             />
+           )}
         </section>
         </div>
       </div>

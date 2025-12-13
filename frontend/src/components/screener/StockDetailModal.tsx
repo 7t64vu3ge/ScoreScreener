@@ -1,5 +1,6 @@
 "use client"
 import React, { useState, useEffect } from 'react';
+import { useAuth } from '@/context/AuthContext';
 import { Stock } from '@/lib/types';
 import { X, Star, Check } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
@@ -30,8 +31,16 @@ export function StockDetailModal({ stock, onClose }: StockDetailModalProps) {
     }
   }, [stock]);
 
+  const { user } = useAuth();
+
   const toggleWatchlist = async () => {
       if (!stock) return;
+      
+      if (!user) {
+          alert("Please sign in to your account to manage your watchlist.");
+          return;
+      }
+
       setLoading(true);
       try {
         if (inWatchlist) {
@@ -40,6 +49,7 @@ export function StockDetailModal({ stock, onClose }: StockDetailModalProps) {
         } else {
             await fetch(`${apiUrl}/watchlist`, {
                 method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ ticker: stock.ticker })
             });
             setInWatchlist(true);

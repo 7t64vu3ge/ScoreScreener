@@ -42,6 +42,7 @@
 - **Framework**: Express.js
 - **Database**: MongoDB (Mongoose ORM)
 - **Authentication**: JWT (JSON Web Tokens) & bcryptjs
+- **Market Data API**: Alpha Vantage (Real-time prices & Company Metadata)
 
 ---
 
@@ -69,6 +70,7 @@
         PORT=5001
         MONGODB_URI=your_mongodb_connection_string
         JWT_SECRET=your_secret_key
+        ALPHA_VANTAGE_API_KEY=your_alpha_vantage_api_key
         ```
     - Seed the database (optional but recommended):
         ```bash

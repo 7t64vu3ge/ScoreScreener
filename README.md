@@ -113,8 +113,7 @@ score-screener/
 │   │   ├── config/         # DB Connection
 │   │   ├── models/         # Mongoose Models (User, Stock, Profile)
 │   │   ├── routes/         # Express Routes
-│   │   ├── middleware/     # Auth Middleware
-│   │   └── data/           # Mock data for seeding
+│   │   └──middleware/     # Auth Middleware
 │   └── ...
 ├── frontend/
 │   ├── src/
